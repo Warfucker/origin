@@ -4,6 +4,7 @@
 #include <QStringList>
 #include <QByteArray>
 #include <QVector>
+#include <QImage>
 
 class Recipe
 {
@@ -16,7 +17,7 @@ public:
     QStringList ingrs,
                 acts,
                 pictPaths;
-    QVector<QByteArray> picts;
+    QVector<QImage> picts;
 
 };
 

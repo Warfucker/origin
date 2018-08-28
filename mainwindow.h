@@ -7,7 +7,9 @@
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QListWidget>
+#include <QPixmap>
 
+#include "viewimages.h"
 #include "data.h"
 #include "dialogyesnocancel.h"
 #include "dialogrec.h"
@@ -26,8 +28,7 @@ public:
 
     void showModel();
     void showRecipe();
-
-
+    void refresh();
 
 private slots:
     void closeEvent(QCloseEvent *event);
@@ -44,11 +45,16 @@ private slots:
 
     void on_actAddRec_triggered();
 
+    void on_recipeListWidget_itemSelectionChanged();
+
 private:
     Ui::MainWindow *ui;
     Data d;
     QString currPath;
-    bool isChanged;
+    bool isChanged, isOpened;
+    int curImg;
+
+    QVector<Recipe> recs;
 
 };
 

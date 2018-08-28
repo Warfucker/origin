@@ -6,15 +6,15 @@
 #include <QFile>
 #include <QPointer>
 #include <QDebug>
+#include <QMouseEvent>
 
 class ClickableQLabel : public QLabel
 {
 Q_OBJECT
 public:
     explicit ClickableQLabel(QWidget *parent = 0, const QString& text = "");
-    ClickableQLabel(QString path, int w, QWidget *parent = 0);
     ~ClickableQLabel();
-    void setImg(QString path);
+    void setImg(QImage img);
 
     bool mn;
     bool isAct;
@@ -26,11 +26,12 @@ private:
     QPixmap pxm;
     double rate;
 
-    void setUp();
+    void setup();
 
 signals:
     void doubleClicked();
     void clicked();
+    void rightClicked();
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *event);

@@ -46,13 +46,13 @@ Recipe Data::getRecipe(int _id)
     res.id = model.data(model.index(_id, 0, QModelIndex())).toInt();
     res.name = model.data(model.index(_id, 1, QModelIndex())).toString();
     res.descr = model.data(model.index(_id, 2, QModelIndex())).toString();
-    res.ingrs = model.data(model.index(_id, 3, QModelIndex())).toString().split(", ", QString::SkipEmptyParts);
-    res.acts= model.data(model.index(_id, 4, QModelIndex())).toString().split(", ", QString::SkipEmptyParts);
+    res.ingrs = model.data(model.index(_id, 3, QModelIndex())).toString().split(",", QString::SkipEmptyParts);
+    res.acts= model.data(model.index(_id, 4, QModelIndex())).toString().split(",", QString::SkipEmptyParts);
 
-    pictNums = model.data(model.index(_id, 5, QModelIndex())).toString().split(", ", QString::SkipEmptyParts);
+    pictNums = model.data(model.index(_id, 5, QModelIndex())).toString().split(",", QString::SkipEmptyParts);
 
-    for (int i = 0; i < pictNums.length(); i++)
-        res.picts.append(allPicts[pictNums[i].toInt() - 1]);
+    /*for (int i = 0; i < pictNums.length(); i++)
+        res.picts.append(allPicts[pictNums[i].toInt() - 1]);*/
     return res;
 }
 

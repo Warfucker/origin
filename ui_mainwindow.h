@@ -15,7 +15,6 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
@@ -26,6 +25,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <viewimages.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -47,7 +47,7 @@ public:
     QLineEdit *searchLineEdit;
     QListWidget *recipeListWidget;
     QVBoxLayout *verticalLayout_2;
-    QLabel *pictureLabel;
+    ViewImages *widgetImgs;
     QTextBrowser *descriptTextEdit;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -106,17 +106,17 @@ public:
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        pictureLabel = new QLabel(centralWidget);
-        pictureLabel->setObjectName(QStringLiteral("pictureLabel"));
+        widgetImgs = new ViewImages(centralWidget);
+        widgetImgs->setObjectName(QStringLiteral("widgetImgs"));
 
-        verticalLayout_2->addWidget(pictureLabel);
+        verticalLayout_2->addWidget(widgetImgs);
 
         descriptTextEdit = new QTextBrowser(centralWidget);
         descriptTextEdit->setObjectName(QStringLiteral("descriptTextEdit"));
 
         verticalLayout_2->addWidget(descriptTextEdit);
 
-        verticalLayout_2->setStretch(0, 5);
+        verticalLayout_2->setStretch(0, 3);
         verticalLayout_2->setStretch(1, 1);
 
         horizontalLayout->addLayout(verticalLayout_2);
@@ -184,7 +184,6 @@ public:
         actSearchExt->setText(QApplication::translate("MainWindow", "\320\240\320\260\321\201\321\210\320\270\321\200\320\265\320\275\320\275\321\213\320\271 \320\277\320\276\320\270\321\201\320\272", Q_NULLPTR));
         actSaveBookAs->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \320\272\320\275\320\270\320\263\321\203 \320\272\320\260\320\272...", Q_NULLPTR));
         searchLineEdit->setPlaceholderText(QApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272...", Q_NULLPTR));
-        pictureLabel->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
         descriptTextEdit->setPlaceholderText(QApplication::translate("MainWindow", "\320\236\320\277\320\270\321\201\320\260\320\275\320\270\320\265 \321\200\320\265\321\206\320\265\320\277\321\202\320\260...", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MainWindow", "\320\244\320\260\320\271\320\273", Q_NULLPTR));
         menuTools->setTitle(QApplication::translate("MainWindow", "\320\230\320\275\321\201\321\202\321\200\321\203\320\274\320\265\320\275\321\202\321\213", Q_NULLPTR));

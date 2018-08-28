@@ -6,8 +6,10 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QDesktopWidget>
+#include <QMenu>
 
 #include "clickableqlabel.h"
+#include "recipe.h"
 
 namespace Ui {
 class DialogRec;
@@ -20,6 +22,8 @@ class DialogRec : public QDialog
 public:
     explicit DialogRec(QWidget *parent = 0);
     ~DialogRec();
+
+    Recipe rec;
 
 private slots:
     void on_pushButtonIngrAdd_clicked();
@@ -36,10 +40,20 @@ private slots:
 
     void highlightLabeles();
 
+    void on_buttonBox_accepted();
+
+    void nextImg();
+
+    void prevImg();
+
+    void contextMenu();
+
+    void deleteImg();
+
 private:
     Ui::DialogRec *ui;
 
-    QVector<ClickableQLabel*> imgs;
+    QVector<QImage> imgs;
     int curImg;
 
 protected:

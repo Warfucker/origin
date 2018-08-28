@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //// ИЗМЕНИТЬ ЗНАЧЕНИЕ isChanged, ТЕКУЩЕЕ ДЛЯ ТЕСТА ////
     isChanged = true;
     //// ИЗМЕНИТЬ ЗНАЧЕНИЕ isChanged, ТЕКУЩЕЕ ДЛЯ ТЕСТА ////
+
+    connect(ui->widgetImgs, SIGNAL(nextClicked()), this, SLOT(nextImg()));
+    connect(ui->widgetImgs, SIGNAL(prevClicked()), this, SLOT(prevImg()));
 }
 
 MainWindow::~MainWindow()
@@ -19,6 +22,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actSaveBook_triggered()
 {
+    for (int i = 0; i < recs.count(); i++)
+        d.addRecipe(recs[i]);
+    if (currPath.isEmpty())
+        currPath = QFileDialog::getSaveFileName(0, "Книга", "/home", "*.dbrc");
     d.saveModel(currPath);
 }
 
@@ -75,25 +82,7 @@ void MainWindow::showModel()
 
 void MainWindow::on_recipeListWidget_itemClicked(QListWidgetItem *item)
 {
-    /*Recipe res;
-    res = d.getRecipe(item->text());
-    ui->descriptTextEdit->setText(res.descr);
-    QPixmap outPixmap = QPixmap();
-    qDebug() << res.picts.count();
-    for (int i = 0; i < res.picts.count(); i++)
-    {
-        outPixmap.loadFromData(res.picts[i]);
-        ui->pictureLabel->setPixmap(outPixmap);
-    }*/
 
-    QString path = QFileDialog::getOpenFileName(0, "Выберите книгу", "/home", "*.png");
-    QByteArray *temp = new QByteArray();
-    QFile *file = new QFile(path);
-    file->open(QIODevice::ReadOnly);
-    *temp = file->readAll();
-    QPixmap *pix = new QPixmap();
-    pix->loadFromData(*temp);
-    ui->pictureLabel->setPixmap(*pix);
 }
 
 void MainWindow::on_actAddRec_triggered()
@@ -101,6 +90,24 @@ void MainWindow::on_actAddRec_triggered()
     DialogRec dr;
     if (dr.exec() == QDialog::Accepted)
     {
-
+        if (dr.rec.name.isEmpty())
+            return;
+        recs.append(dr.rec);
+        refresh();
     }
 }
+
+void MainWindow::refresh()
+{
+    ui->recipeListWidget->clear();
+    for (int i = 0; i < recs.count(); i++)
+        ui->recipeListWidget->addItem(recs[i].name);
+}
+
+void MainWindow::on_recipeListWidget_itemSelectionChanged()
+{
+    int i = ui->recipeListWidget->currentRow();
+    ui->widgetImgs->showImage(recs[i].picts[0], 1, recs[i].picts.count());
+    ui->descriptTextEdit->setText(recs[i].descr);
+}
+
